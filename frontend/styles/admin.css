@@ -1,0 +1,204 @@
+/* Admin page specific styles */
+#adminPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 140px 15px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    gap: 15px;
+    padding-top: 130px;
+}
+
+#winnerDisplay {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#winnerDisplay h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #666;
+}
+
+#winnerText {
+    font-size: 20px;
+    color: #333;
+    margin: 10px 0;
+    word-break: break-word;
+}
+
+#subsequentPresses {
+    margin-top: 15px;
+}
+
+#subsequentPresses h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+#pressesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#pressesList li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#connectedUsers {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 8px 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 99;
+    text-align: center;
+    max-height: 60px;
+    overflow-y: auto;
+}
+
+#connectedUsers h3 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+#usersList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+#usersList li {
+    padding: 2px 8px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+#messagesDisplay {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.messages-header {
+    margin-bottom: 15px;
+}
+
+.messages-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.message-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toggle-button, .clear-button {
+    padding: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.toggle-button.enabled {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.toggle-button.disabled {
+    background-color: #f44336;
+    color: white;
+}
+
+.clear-button {
+    background-color: #ff9800;
+    color: white;
+}
+
+#userMessages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#userMessages li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    word-break: break-word;
+}
+
+#resetButton {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#resetButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    #pageHeader {
+        padding: 10px;
+    }
+
+    #pageHeader h1 {
+        font-size: 18px;
+    }
+
+    #adminPage {
+        padding-top: 120px;
+        gap: 10px;
+    }
+
+    #winnerDisplay, #messagesDisplay {
+        padding: 12px;
+    }
+
+    .messages-header h2 {
+        font-size: 16px;
+    }
+
+    .toggle-button, .clear-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    #resetButton {
+        padding: 10px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+} 

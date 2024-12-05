@@ -1,0 +1,41 @@
+<!-- Character encoding for the document -->
+<!-- Responsive design for mobile devices -->
+<!-- Title of the page -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buzzer-Seite</title>
+    <!-- Link to general styles -->
+    <!-- Link to buzzer-specific styles -->
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/buzzer.css">
+</head>
+<body>
+    <header id="pageHeader">
+        <!-- Display username -->
+        <h1>Willkommen, <span id="usernameDisplay">Spieler</span>!</h1>
+    </header>
+    <div id="buzzerPage">
+        <div class="button-plate">
+            <!-- Main buzzer button -->
+            <button id="redButton"></button>
+        </div>
+        <div id="messageSection">
+            <!-- Display last message sent -->
+            <div id="lastMessage"></div>
+            <div class="message-input">
+                <!-- Input for sending messages -->
+                <input type="text" id="messageInput" placeholder="Nachricht an den Admin">
+                <!-- Button to send message -->
+                <button id="sendMessage">Senden</button>
+            </div>
+        </div>
+    </div>
+    <!-- Include Socket.IO library -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <!-- Link to custom script -->
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin-Panel</title>
+    <!-- Link to general and admin-specific stylesheets -->
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <!-- Header for the admin panel -->
+    <header id="pageHeader">
+        <h1>Admin-Panel</h1>
+    </header>
+    <!-- Section displaying connected users -->
+    <div id="connectedUsers">
+        <h3>Verbundene Benutzer</h3>
+        <ul id="usersList"></ul>
+    </div>
+    <!-- Main admin page content -->
+    <div id="adminPage">
+        <!-- Display for the first buzzer press -->
+        <div id="winnerDisplay">
+            <h2>Erster Druck:</h2>
+            <p id="winnerText">Warten auf Buzzer-Druck...</p>
+            <!-- List of subsequent buzzer presses -->
+            <div id="subsequentPresses">
+                <h3>Nachfolgende Drücke:</h3>
+                <ul id="pressesList"></ul>
+            </div>
+        </div>
+        <!-- Display for user messages -->
+        <div id="messagesDisplay">
+            <div class="messages-header">
+                <h2>Benutzernachrichten:</h2>
+                <div class="message-controls">
+                    <!-- Buttons to toggle chat and clear messages -->
+                    <button id="toggleChat" class="toggle-button">Chat aktivieren</button>
+                    <button id="clearMessages" class="clear-button">Nachrichten löschen</button>
+                </div>
+            </div>
+            <ul id="userMessages"></ul>
+        </div>
+        <!-- Button to reset the buzzer -->
+        <button id="resetButton">Buzzer zurücksetzen</button>
+    </div>
+    <!-- Include Socket.IO and custom script -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

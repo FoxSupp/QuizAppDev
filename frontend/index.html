@@ -1,0 +1,37 @@
+// Define the document type and language
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <!-- Set character encoding and viewport for responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the application -->
+    <title>Buzzer-App</title>
+    <!-- Link to general and login-specific stylesheets -->
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <!-- Header section for the page -->
+    <header id="pageHeader">
+        <h1>Buzzer-Spiel</h1>
+    </header>
+    <!-- Main content area -->
+    <div id="mainContent">
+        <!-- Section for username input -->
+        <div id="usernamePage">
+            <h2>Geben Sie Ihren Benutzernamen ein</h2>
+            <input type="text" id="usernameInput" placeholder="Benutzername">
+            <!-- Checkbox for admin login option -->
+            <div class="checkbox-container">
+                <input type="checkbox" id="adminCheck">
+                <label for="adminCheck">Als Admin anmelden</label>
+            </div>
+            <button id="submitUsername">Absenden</button>
+        </div>
+    </div>
+    <!-- Include Socket.IO library and custom script -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

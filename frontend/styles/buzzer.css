@@ -1,0 +1,150 @@
+/* Buzzer page specific styles */
+#buzzerPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 70px 20px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.button-plate {
+    margin: 20px 0;
+    padding: 20px;
+}
+
+#redButton {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+#redButton:hover {
+    transform: scale(1.1);
+}
+
+#messageSection {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#lastMessage {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+    color: #666;
+    min-height: 20px;
+}
+
+.message-input {
+    display: flex;
+    gap: 8px;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#sendMessage {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#sendMessage:hover {
+    background-color: #45a049;
+}
+
+#messageSection.disabled {
+    position: relative;
+}
+
+#messageSection.disabled::after {
+    content: 'Chat ist derzeit deaktiviert';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+    #buzzerPage {
+        padding-top: 60px;
+    }
+
+    #redButton {
+        width: 120px;
+        height: 120px;
+    }
+
+    #messageSection {
+        padding: 10px;
+    }
+
+    #messageInput {
+        padding: 10px;
+    }
+
+    #sendMessage {
+        padding: 10px 15px;
+    }
+
+    .message-input {
+        flex-direction: column;
+    }
+
+    #messageInput {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #sendMessage {
+        width: 100%;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    #buzzerPage {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        padding: 70px 20px 20px;
+    }
+
+    #redButton {
+        width: 100px;
+        height: 100px;
+    }
+
+    #messageSection {
+        margin-top: 0;
+    }
+} 

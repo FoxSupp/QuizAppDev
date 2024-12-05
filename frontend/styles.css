@@ -1,0 +1,384 @@
+#pageHeader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: white;
+    padding: 0.8rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+#pageHeader h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+#usernamePage {
+    text-align: center;
+}
+
+#usernameInput {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#submitUsername {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#buzzerPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 70px 20px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.button-plate {
+    margin: 20px 0;
+    padding: 20px;
+}
+
+#redButton {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+#redButton:hover {
+    transform: scale(1.1);
+}
+
+#resetButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#resetButton:hover {
+    background-color: #45a049;
+}
+
+#resetButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
+}
+
+.checkbox-container {
+    margin: 10px 0;
+}
+
+#adminPage {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#winnerDisplay {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    min-width: 300px;
+}
+
+#winnerText {
+    font-size: 24px;
+    color: #333;
+    margin: 10px 0;
+}
+
+#subsequentPresses {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#pressesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#pressesList li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#subsequentPresses h3 {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+#connectedUsers {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    min-width: 150px;
+    margin-left: 20px;
+    align-self: flex-start;
+}
+
+#connectedUsers h3 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+}
+
+#usersList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    text-align: left;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#usersList li {
+    padding: 2px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#usersList li:last-child {
+    border-bottom: none;
+}
+
+#messageSection {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-input {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#sendMessage {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#sendMessage:hover {
+    background-color: #45a049;
+}
+
+#messageHistory {
+    margin-bottom: 15px;
+}
+
+#messageHistory h3 {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+#personalMessages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#personalMessages li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+#messagesDisplay {
+    margin: 20px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#userMessages {
+    list-style: none;
+    padding: 0;
+}
+
+#userMessages li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+#userMessages li:last-child {
+    border-bottom: none;
+}
+
+.messages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.toggle-button, .clear-button {
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toggle-button.enabled {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.toggle-button.disabled {
+    background-color: #f44336;
+    color: white;
+}
+
+.clear-button {
+    background-color: #ff9800;
+    color: white;
+}
+
+.clear-button:hover {
+    background-color: #f57c00;
+}
+
+#messageSection.disabled {
+    position: relative;
+}
+
+#messageSection.disabled::after {
+    content: 'Chat ist derzeit deaktiviert';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.message-controls {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 480px) {
+    #buzzerPage {
+        padding-top: 60px;
+    }
+
+    #redButton {
+        width: 120px;
+        height: 120px;
+    }
+
+    #messageSection {
+        padding: 10px;
+    }
+
+    #messageInput {
+        padding: 10px;
+    }
+
+    #sendMessage {
+        padding: 10px 15px;
+    }
+
+    .message-input {
+        flex-direction: column;
+    }
+
+    #messageInput {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #sendMessage {
+        width: 100%;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    #buzzerPage {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        padding: 70px 20px 20px;
+    }
+
+    #redButton {
+        width: 100px;
+        height: 100px;
+    }
+
+    #messageSection {
+        margin-top: 0;
+    }
+}
