@@ -24,18 +24,49 @@ class SocketService {
 
   SocketService._internal() {
     socket = IO.io(
-        'http://server.sascha-belau.com:3000',
+        'wss://server.sascha-belau.com:3000',
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .enableForceNew()
-            .enableAutoConnect()
-            .setExtraHeaders({'Access-Control-Allow-Origin': '*'})
+            .disableAutoConnect()
+            .setReconnectionAttempts(0)
+            .setPath('/socket.io/')
+            .enableForceNewConnection()
+            .setQuery({
+              'EIO': '4',
+              'transport': 'websocket',
+            })
+            .setExtraHeaders({
+              'Access-Control-Allow-Origin': '*',
+              'Connection': 'Upgrade',
+              'Upgrade': 'websocket',
+            })
+            .setTimeout(5000)
             .build());
 
-    socket.connect();
+    try {
+      socket.connect();
+      print('Attempting to connect to WebSocket...');
+    } catch (e) {
+      print('Connection attempt failed: $e');
+    }
 
     socket.onConnect((_) {
-      print('Socket Connection established');
+      print('Socket Connection established successfully');
+    });
+
+    socket.onConnectError((data) {
+      print('Connect Error: $data');
+      socket.disconnect();
+    });
+
+    socket.onError((data) {
+      print('Socket Error: $data');
+      socket.disconnect();
+    });
+
+    socket.onDisconnect((_) {
+      print('Socket Disconnected');
     });
 
     // Buzzer Events
@@ -99,9 +130,6 @@ class SocketService {
       print('User list updated: $users');
       connectedUsers = List<String>.from(users);
     });
-
-    socket.onError((error) => print('Socket Error: $error'));
-    socket.onDisconnect((_) => print('Socket Disconnected'));
   }
 
   void setUsername(String username) {
@@ -138,5 +166,10 @@ class SocketService {
 
   void dispose() {
     socket.dispose();
+  }
+
+  void disconnectAllUsers() {
+    print('Disconnecting all users');
+    socket.emit('disconnectAllUsers');
   }
 }

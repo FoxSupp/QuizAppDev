@@ -143,6 +143,44 @@ io.on('connection', (socket) => {
     io.emit('buzzersReset');
   });
 
+  // Handle disconnect all users request
+  socket.on('disconnectAllUsers', () => {
+    // Hole alle verbundenen Sockets
+    const connectedSockets = io.sockets.sockets;
+    
+    // Speichere die Admin-ID
+    const adminId = socket.id;
+    
+    // Trenne alle Verbindungen außer den Admin
+    connectedSockets.forEach((clientSocket) => {
+      if (clientSocket.id !== adminId) {
+        console.log(`Disconnecting user: ${connectedUsers.get(clientSocket.id)}`);
+        clientSocket.disconnect(true);
+      }
+    });
+    
+    // Lösche alle User-Daten außer Admin
+    const adminUsername = connectedUsers.get(adminId);
+    connectedUsers.clear();
+    connectedUsers.set(adminId, adminUsername);
+    
+    // Lösche alle Nachrichten
+    userMessages.clear();
+    
+    // Reset Buzzer-Status
+    buzzerLocked = false;
+    firstPresser = null;
+    firstPressTime = null;
+    subsequentPresses = [];
+    chatEnabled = false;
+    
+    // Informiere den Admin über den erfolgreichen Reset
+    socket.emit('systemMessage', 'Alle Benutzer wurden getrennt');
+    
+    // Update die User-Liste für den Admin
+    io.emit('userListUpdate', Array.from(connectedUsers.values()));
+  });
+
   // Handle user disconnection
   socket.on('disconnect', () => {
     if (connectedUsers.has(socket.id)) {

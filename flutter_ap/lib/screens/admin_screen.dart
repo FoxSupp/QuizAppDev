@@ -83,6 +83,36 @@ class _AdminScreenState extends State<AdminScreen> {
                 );
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.power_settings_new),
+              title: const Text('Alle Verbindungen trennen'),
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Bestätigung'),
+                      content: const Text(
+                        'Möchten Sie wirklich alle Benutzer-Verbindungen trennen?'
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Abbrechen'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            socketService.disconnectAllUsers();
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Ja, alle trennen'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),
