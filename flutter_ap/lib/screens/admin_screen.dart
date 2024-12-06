@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/socket_service.dart';
 import 'admin_chat_screen.dart';
+import 'user_list_widget.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -49,20 +50,27 @@ class _AdminScreenState extends State<AdminScreen> {
         title: const Text('Admin Panel'),
       ),
       drawer: Drawer(
-        child: ListView(
+        child: Column(
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text(
-                'Admin Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+              child: Center(
+                child: Text(
+                  'Admin Menu',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
                 ),
               ),
             ),
+            SizedBox(
+              height: 300,
+              child: const UserListWidget(),
+            ),
+            const Divider(),
             ListTile(
               leading: const Icon(Icons.dashboard),
               title: const Text('Buzzer Dashboard'),
@@ -93,8 +101,7 @@ class _AdminScreenState extends State<AdminScreen> {
                     return AlertDialog(
                       title: const Text('Bestätigung'),
                       content: const Text(
-                        'Möchten Sie wirklich alle Benutzer-Verbindungen trennen?'
-                      ),
+                          'Möchten Sie wirklich alle Benutzer-Verbindungen trennen?'),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),

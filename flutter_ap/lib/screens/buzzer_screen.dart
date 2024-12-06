@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/buzzer_button.dart';
 import '../services/socket_service.dart';
 import 'user_chat_screen.dart';
+import '../widgets/user_list_widget.dart';
 
 class BuzzerScreen extends StatelessWidget {
   const BuzzerScreen({super.key});
@@ -14,27 +15,27 @@ class BuzzerScreen extends StatelessWidget {
         title: const Text('Buzzer Game'),
       ),
       drawer: Drawer(
-        child: ListView(
+        child: Column(
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+              child: Center(
+                child: Text(
+                  'Spieler Menu',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
                 ),
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.gamepad),
-              title: const Text('Buzzer'),
-              onTap: () {
-                Navigator.pop(context);
-              },
+            SizedBox(
+              height: 300,
+              child: const UserListWidget(),
             ),
+            const Divider(),
             ListTile(
               leading: const Icon(Icons.chat),
               title: const Text('Chat'),
