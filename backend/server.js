@@ -12,13 +12,22 @@
 
 // Import necessary modules
 const express = require('express');
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const cors = require('cors');
 const { Server } = require('socket.io');
 
-// Initialize Express app and HTTP server
+// Initialize Express app
 const app = express();
-const server = http.createServer(app);
+
+// SSL/TLS Configuration
+const httpsOptions = {
+  key: fs.readFileSync('/path/to/your/privkey.pem'),
+  cert: fs.readFileSync('/path/to/your/fullchain.pem')
+};
+
+// Create HTTPS server
+const server = https.createServer(httpsOptions, app);
 
 // Setup Socket.IO server with CORS configuration
 const io = new Server(server, {
@@ -149,5 +158,5 @@ io.on('connection', (socket) => {
 
 // Start the server
 server.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`HTTPS Server running at https://localhost:${port}`);
 });
