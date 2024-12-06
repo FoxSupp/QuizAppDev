@@ -24,7 +24,7 @@ class SocketService {
 
   SocketService._internal() {
     socket = IO.io(
-        'https://server.sascha-belau.com:3000',
+        'http://server.sascha-belau.com:3000',
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .enableForceNew()

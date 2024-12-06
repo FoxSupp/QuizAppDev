@@ -22,8 +22,8 @@ const app = express();
 
 // SSL/TLS Configuration
 const httpsOptions = {
-  key: fs.readFileSync('/path/to/your/privkey.pem'),
-  cert: fs.readFileSync('/path/to/your/fullchain.pem')
+  key: fs.readFileSync('/etc/letsencrypt/live/server.sascha-belau.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/server.sascha-belau.com/fullchain.pem')
 };
 
 // Create HTTPS server
@@ -158,5 +158,5 @@ io.on('connection', (socket) => {
 
 // Start the server
 server.listen(port, () => {
-  console.log(`HTTPS Server running at https://localhost:${port}`);
+  console.log(`HTTPS Server running at https://server.sascha-belau.com:${port}`);
 });
