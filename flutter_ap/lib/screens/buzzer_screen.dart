@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import '../widgets/user_list_widget.dart';
 import '../widgets/buzzer_button.dart';
 import '../services/socket_service.dart';
 import 'user_chat_screen.dart';
-import '../widgets/user_list_widget.dart';
 
 class BuzzerScreen extends StatelessWidget {
   const BuzzerScreen({super.key});

@@ -58,7 +58,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
             child: Row(
               children: [
                 Text(
-                  _socketService.isChatEnabled ? 'Chat aktiv' : 'Chat gesperrt',
+                  !_socketService.isChatEnabled ? 'Chat gesperrt' : 'Chat aktiv',
                   style: const TextStyle(fontSize: 14),
                 ),
                 const SizedBox(width: 8),

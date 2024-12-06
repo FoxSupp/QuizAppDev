@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/socket_service.dart';
 import 'admin_chat_screen.dart';
-import 'user_list_widget.dart';
+import '../widgets/user_list_widget.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -57,12 +57,26 @@ class _AdminScreenState extends State<AdminScreen> {
                 color: Colors.blue,
               ),
               child: Center(
-                child: Text(
-                  'Admin Menu',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Admin Menu',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      '(Administrator)',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -73,7 +87,7 @@ class _AdminScreenState extends State<AdminScreen> {
             const Divider(),
             ListTile(
               leading: const Icon(Icons.dashboard),
-              title: const Text('Buzzer Dashboard'),
+              title: const Text('Dashboard'),
               onTap: () {
                 Navigator.pop(context); // Close drawer
               },

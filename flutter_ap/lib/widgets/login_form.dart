@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/buzzer_screen.dart';
 import '../screens/admin_screen.dart';
 import '../services/socket_service.dart';
+import '../config/app_config.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -18,36 +19,18 @@ class _LoginFormState extends State<LoginForm> {
   bool _isAdmin = false;
 
   @override
-  void initState() {
-    super.initState();
-    _setupSocketListeners();
-  }
-
-  void _setupSocketListeners() {
-    _socketService.socket.on('duplicateUsername', (_) {
-      setState(() => _isLoading = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Dieser Benutzername ist bereits vergeben!'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    });
-  }
-
-  @override
   void dispose() {
     _usernameController.dispose();
     super.dispose();
   }
 
-  void _onJoinPressed() {
+  void _onJoinPressed() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
 
-      _socketService.setUsername(_usernameController.text);
-
-      Future.delayed(const Duration(milliseconds: 500), () {
+      try {
+        await _socketService.setUsername(_usernameController.text);
+        
         if (mounted) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
@@ -56,88 +39,66 @@ class _LoginFormState extends State<LoginForm> {
             ),
           );
         }
-      });
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Fehler beim Verbinden: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        setState(() => _isLoading = false);
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 400),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Willkommen zum Buzzer!',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            controller: _usernameController,
+            decoration: const InputDecoration(
+              labelText: 'Benutzername',
+              hintText: 'Gib deinen Benutzernamen ein',
+              prefixIcon: Icon(Icons.person),
             ),
-            const SizedBox(height: 48),
-            TextFormField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'Benutzername',
-                hintText: 'Gib deinen Benutzernamen ein',
-                prefixIcon: Icon(Icons.person),
-              ),
-              enabled: !_isLoading,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Bitte gib einen Benutzernamen ein';
-                }
-                if (value.length < 3) {
-                  return 'Der Benutzername muss mindestens 3 Zeichen lang sein';
-                }
-                return null;
-              },
+            enabled: !_isLoading,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Bitte gib einen Benutzernamen ein';
+              }
+              if (value.length < 3) {
+                return 'Der Benutzername muss mindestens 3 Zeichen lang sein';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 20),
+          SwitchListTile(
+            title: const Text('Als Admin anmelden'),
+            value: _isAdmin,
+            onChanged: _isLoading
+                ? null
+                : (bool value) {
+                    setState(() {
+                      _isAdmin = value;
+                    });
+                  },
+          ),
+          const SizedBox(height: 24),
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: _isLoading ? null : _onJoinPressed,
+              child: _isLoading
+                  ? const CircularProgressIndicator()
+                  : const Text('Beitreten'),
             ),
-            const SizedBox(height: 20),
-            SwitchListTile(
-              title: const Text('Als Admin anmelden'),
-              value: _isAdmin,
-              onChanged: (bool value) {
-                setState(() {
-                  _isAdmin = value;
-                });
-              },
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: _isLoading ? null : _onJoinPressed,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _isAdmin ? Colors.red : Colors.blue,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: _isLoading
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                          strokeWidth: 2,
-                        ),
-                      )
-                    : Text(
-                        _isAdmin ? 'ALS ADMIN BEITRETEN' : 'BEITRETEN',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

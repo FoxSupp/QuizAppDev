@@ -24,23 +24,11 @@ class SocketService {
 
   SocketService._internal() {
     socket = IO.io(
-        'wss://server.sascha-belau.com:3000',
+        'https://server.sascha-belau.com:3000',
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .enableForceNew()
-            .disableAutoConnect()
-            .setReconnectionAttempts(0)
-            .setPath('/socket.io/')
-            .enableForceNewConnection()
-            .setQuery({
-              'EIO': '4',
-              'transport': 'websocket',
-            })
-            .setExtraHeaders({
-              'Access-Control-Allow-Origin': '*',
-              'Connection': 'Upgrade',
-              'Upgrade': 'websocket',
-            })
+            .enableAutoConnect()
             .setTimeout(5000)
             .build());
 
@@ -132,10 +120,12 @@ class SocketService {
     });
   }
 
-  void setUsername(String username) {
-    print('Setting username: $username');
-    currentUsername = username;
-    socket.emit('setUsername', username);
+  Future<void> setUsername(String username) {
+    return Future(() {
+      print('Setting username: $username');
+      currentUsername = username;
+      socket.emit('setUsername', username);
+    });
   }
 
   void pressBuzzer() {
@@ -160,7 +150,8 @@ class SocketService {
 
   // Neue Methode zum Löschen der lokalen Nachrichten
   void clearLocalMessages() {
-    print('Clearing local messages');
+    print('Clearing messages on server');
+    socket.emit('clearMessages'); // Neue Server-Event
     userMessages.clear();
   }
 
@@ -169,7 +160,6 @@ class SocketService {
   }
 
   void disconnectAllUsers() {
-    print('Disconnecting all users');
     socket.emit('disconnectAllUsers');
   }
 }
